@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "942d8a86395a2523239383a0ca1bb407",
-    "content-hash": "c9827267e650372f52cc0c831d0105c0",
+    "hash": "7bef2e7410d3d6e3f0dbae3f26febbba",
+    "content-hash": "e8f45ec76458be714970e98bc7011ec8",
     "packages": [
+        {
+            "name": "bupt1987/html-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bupt1987/html-parser.git",
+                "reference": "492264313b427b0efd87e54c4dfeb143ca93c59f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bupt1987/html-parser/zipball/492264313b427b0efd87e54c4dfeb143ca93c59f",
+                "reference": "492264313b427b0efd87e54c4dfeb143ca93c59f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HtmlParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "俊杰jerry",
+                    "email": "bupt1987@gmail.com",
+                    "homepage": "http://bupt1987.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Html Parser",
+            "homepage": "https://github.com/bupt1987/html-parser",
+            "time": "2016-02-23 10:48:36"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -772,6 +815,48 @@
                 "orm"
             ],
             "time": "2016-01-05 21:34:58"
+        },
+        {
+            "name": "jacklam/php-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lamjack/php-tools.git",
+                "reference": "a978d0123bef77632ebe4229b64a30ba7a71a419"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lamjack/php-tools/zipball/a978d0123bef77632ebe4229b64a30ba7a71a419",
+                "reference": "a978d0123bef77632ebe4229b64a30ba7a71a419",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JackLam",
+                    "email": "linjue@wilead.com",
+                    "homepage": "http://blog.wilead.com"
+                },
+                {
+                    "name": "WIZ",
+                    "email": "it@wizmacau.com",
+                    "homepage": "http://wizmacau.com"
+                }
+            ],
+            "description": "PHP useful tools library.",
+            "time": "2016-03-05 17:45:31"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3406,7 +3491,9 @@
         "sensio/distribution-bundle": 20,
         "symfony/security": 20,
         "symfony/twig-bundle": 20,
-        "symfony/security-bundle": 20
+        "symfony/security-bundle": 20,
+        "bupt1987/html-parser": 20,
+        "jacklam/php-tools": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

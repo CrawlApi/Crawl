@@ -15,7 +15,9 @@
         "symfony/security": "3.0.x-dev",
         "symfony/twig-bundle": "3.0.x-dev",
         "nelmio/api-doc-bundle": "~2.11.2",
-        "symfony/security-bundle": "3.0.x-dev"
+        "symfony/security-bundle": "3.0.x-dev",
+        "bupt1987/html-parser": "dev-master",
+        "jacklam/php-tools": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.3",
