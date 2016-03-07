@@ -1,0 +1,8 @@
+crawl_api:
+    resource: "@CrawlApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
