@@ -1,0 +1,36 @@
+Crawl\CommonBundle\Entity\WordCollins:
+    type: entity
+    table: crawl_word_collins
+    repositoryClass: Crawl\CommonBundle\Repository\WordCollinsRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        category:
+            type: string
+            nullable: true
+        note:
+            type: string
+            nullable: true
+        sentence:
+            type: array
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        Word:
+            targetEntity: Crawl\CommonBundle\Entity\Word
+            joinColumn:
+                name: WordId
+                referencedColumnName: id
+                onDelete: CASCADE

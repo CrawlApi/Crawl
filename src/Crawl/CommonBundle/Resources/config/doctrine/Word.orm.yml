@@ -1,0 +1,50 @@
+Crawl\CommonBundle\Entity\Word:
+    type: entity
+    table: crawl_word
+    repositoryClass: Crawl\CommonBundle\Repository\WordRepository
+    indexes:
+        word_index:
+            columns: [ word ]
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        word:
+            type: string
+            nullable: false
+        speakUK:
+            type: string
+            nullable: true
+        rate:
+            type: integer
+            nullable: false
+        n:
+            type: string
+            nullable: true
+        vt:
+            type: string
+            nullable: true
+        vi:
+            type: string
+            nullable: true
+        adj:
+            type: string
+            nullable: true
+        adv:
+            type: string
+            nullable: true
+        shapes:
+            type: array
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update

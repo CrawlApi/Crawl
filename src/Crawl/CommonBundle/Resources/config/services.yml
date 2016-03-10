@@ -1,4 +1,8 @@
 services:
-#    crawl_common.example:
-#        class: Crawl\CommonBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    # helper
+    crawl_common.helper.curl:
+        class: Crawl\CommonBundle\Helper\CurlHelper
+
+    crawl_common.helper.word:
+        class: Crawl\CommonBundle\Helper\WorkHelper
+
