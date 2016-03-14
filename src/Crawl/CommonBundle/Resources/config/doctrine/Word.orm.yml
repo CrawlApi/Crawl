@@ -17,6 +17,9 @@ Crawl\CommonBundle\Entity\Word:
         speakUK:
             type: string
             nullable: true
+        speakUS:
+            type: string
+            nullable: true
         rate:
             type: integer
             nullable: false

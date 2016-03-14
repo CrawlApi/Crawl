@@ -23,12 +23,12 @@ class WorkHelper
      */
     public function speak(ParserDom $dom, array &$data)
     {
-        $data['speakUK'] = [];
+        $data['speak'] = [];
         $node = $dom->find('.info-base', 0);
         if ($node->find('.base-speak')) {
             foreach ($node->find('.base-speak .new-speak-step') as $v) {
                 preg_match("/displayAudio\(\'(\S+)\'\)/", $v->getAttr('onmouseover'), $out);
-                array_push($data['speakUK'], trim($out[1]));
+                array_push($data['speak'], trim($out[1]));
             }
         }
     }
@@ -61,7 +61,7 @@ class WorkHelper
                 $data['translation'][] = [str_replace('.', '', trim($v->getPlainText()))];
             }
             foreach ($baseListNode->find('li p') as $k => $v) {
-                array_push($data['translation'][$k], trim($v->getPlainText()));
+                array_push($data['translation'][$k], str_replace(' ', '', trim($v->getPlainText())));
             }
         }
     }
@@ -95,20 +95,39 @@ class WorkHelper
         $node = $dom->find('.collins-section', 0);
         if ($node) {
             $index = -1;
+            $arr = 0;
             foreach ($node->find('div') as $v) {
+                //当没有order,设定一个default值
+                if ($v->getAttr('class') != 'section-h') {
+                    $index = 0;
+                }
                 if ($v->getAttr('class') == 'section-h') {
                     $index++;
+                    $arr = 0;
                     preg_match("/<span (\S+)>(.+)<\/span>(.+)/", $v->find('p', 0)->innerHtml(), $out);
                     $data['collins'][$index]['translation']['en'] = trim($out[2]);
                     $data['collins'][$index]['translation']['zh'] = trim($out[3]);
-                } elseif (trim($v->getAttr('class')) == 'section-prep') {
-                    $family = $v->find('p.size-chinese .family-english', 0)->getPlainText() . ' ' . $v->find('p.size-chinese .family-chinese')->getPlainText();
+                    //获取sentence有2种情况
+                } elseif ((trim($v->getAttr('class')) == 'section-prep' || trim($v->getAttr('class')) == 'section-prep no-order') && $v->find('p.size-chinese .family-english', 0)) {
+                    $arr++;
+                    $note = $v->find('p.size-chinese .family-english', 0)->getPlainText() . ' ' . $v->find('p.size-chinese .family-chinese', 0)->getPlainText();
+                    $note = $note . ' ' . $v->find('p.size-chinese .size-english', 0)->getPlainText();
+                    $data['collins'][$index]['translation'][$arr]['note'] = $note;
                 } elseif (trim($v->getAttr('class')) == 'text-sentence') {
-                    //TODO
+                    $sentence = array();
+                    foreach ($v->find('.sentence-item ') as $value) {
+                        preg_match("/(.+)<i class=\"speak-step\" onmouseover=\"displayAudio\(\'(\S+)\'\)\"><\/i>/", $value->find('p.family-english', 0)->innerHtml(), $out);
+                        $sentenceZh = $value->find('p.family-chinese', 0)->getPlainText();
+                        array_push($sentence, array(
+                            'en' => $out[1],
+                            'zh' => trim($sentenceZh),
+                            'voice' => $out[2]
+                        ));
+                    }
+                    $data['collins'][$index]['translation'][$arr]['sentence'] = $sentence;
                 }
             }
         }
-        var_dump($data);
     }
 
 }
