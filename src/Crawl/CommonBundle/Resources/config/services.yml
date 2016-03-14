@@ -6,3 +6,8 @@ services:
     crawl_common.helper.word:
         class: Crawl\CommonBundle\Helper\WorkHelper
 
+    # service
+    crawl_common.service.word:
+        class: Crawl\CommonBundle\Service\WorkService
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
