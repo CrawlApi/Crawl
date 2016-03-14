@@ -1,6 +1,6 @@
 crawl_api:
     resource: "@CrawlApiBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix: /
 
 root:
     path: /
