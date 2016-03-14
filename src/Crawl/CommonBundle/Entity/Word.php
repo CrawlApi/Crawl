@@ -23,6 +23,11 @@ class Word
     private $speakUK;
 
     /**
+     * @var string
+     */
+    private $speakUS;
+
+    /**
      * @var integer
      */
     private $rate;
@@ -341,5 +346,28 @@ class Word
     {
         return $this->updatedAt;
     }
-}
 
+    /**
+     * Set speakUS
+     *
+     * @param string $speakUS
+     *
+     * @return Word
+     */
+    public function setSpeakUS($speakUS)
+    {
+        $this->speakUS = $speakUS;
+
+        return $this;
+    }
+
+    /**
+     * Get speakUS
+     *
+     * @return string
+     */
+    public function getSpeakUS()
+    {
+        return $this->speakUS;
+    }
+}

@@ -63,7 +63,7 @@ class ICIBACommand extends ContainerAwareCommand
         $wordHelper->shapes($infoDom, $data);
         $wordHelper->collins($dom, $data);
 
-//        var_dump($data);
+        var_dump($data);
 
         return 0;
     }

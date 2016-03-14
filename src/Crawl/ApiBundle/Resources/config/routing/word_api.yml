@@ -1,0 +1,4 @@
+crawl_api.word_api:
+    path: /{word}
+    defaults: { _controller: "CrawlApiBundle:WordApi:api" }
+    methods: [GET, POST]
