@@ -10,7 +10,9 @@ namespace Crawl\CommonBundle\Service;
 
 use Crawl\CommonBundle\Entity\Word;
 use Crawl\CommonBundle\Entity\WordCollins;
+use Crawl\CommonBundle\Helper\MongoDBHelper;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -19,7 +21,20 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class WorkService
 {
-    use ContainerAwareTrait;
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
+     * Sets the container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param $data
@@ -120,5 +135,51 @@ class WorkService
     public function entityManager()
     {
         return $this->container->get('doctrine.orm.entity_manager');
+    }
+
+    /**
+     * @param $data
+     */
+    public function saveToMongoDB($data)
+    {
+        $mongodb = new MongoDBHelper('Crawl');
+
+        $this->saveWordToMongoDB($data, $mongodb);
+
+    }
+
+    /**
+     * @param $data
+     * @param \Crawl\CommonBundle\Helper\MongoDBHelper $mongodb
+     * @return null
+     */
+    public function saveWordToMongoDB($data, $mongodb)
+    {
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $word = $mongodb->findOne('crawl_word', array('word' => $data['word']));
+
+        if ($word)
+            return null;
+
+        $word = array(
+            'word' => $data['word'],
+            'speakUK' => $data['speak'][0],
+            'speakUS' => $data['speak'][1],
+            'rate' => $data['rate'],
+            'n' => null,
+            'adj' => null,
+            'adv' => null,
+            'vi' => null,
+            'vt' => null,
+            'shapes' => $accessor->getValue($data, '[shapes]')
+        );
+        if ($accessor->getValue($data, '[translation]')) {
+            foreach ($accessor->getValue($data, '[translation]') as $k => $v) {
+                $word[$v[0]] = $v[1];
+            }
+        }
+
+        $mongodb->insert('crawl_word', $word);
+
     }
 }

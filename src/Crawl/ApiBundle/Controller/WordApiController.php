@@ -46,8 +46,11 @@ class WordApiController extends AbstractController
         $wordHelper->shapes($infoDom, $data);
         $wordHelper->collins($dom, $data);
 
-        //存入数据库
-        $wordService->save($data);
+        //存入MongoDB数据库
+        $wordService->saveToMongoDB($data);
+
+        //存入Mysql数据库
+//        $wordService->save($data);
 
         return new JsonResponse($data);
     }
