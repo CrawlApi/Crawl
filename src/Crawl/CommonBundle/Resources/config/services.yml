@@ -11,3 +11,11 @@ services:
         class: Crawl\CommonBundle\Service\WorkService
         calls:
             - [ setContainer, [ '@service_container' ] ]
+
+    # EventListener
+    crawl_common.event_listener.persist:
+        class: Crawl\CommonBundle\EventListener\PersistEventListener
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

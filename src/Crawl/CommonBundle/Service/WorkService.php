@@ -30,9 +30,8 @@ class WorkService
         //先存word
         $word = $this->saveWord($data);
         //存wordCollins
-        var_dump($accessor->getValue($data, '[collins]'));
         if ($word && $accessor->getValue($data, '[collins]')) {
-            $this->saveWordCollins($word, $accessor->getValue($data, '[collins]'));
+            $this->saveWordCollins($word, $data['collins']);
         }
     }
 
@@ -57,7 +56,7 @@ class WorkService
         $word->setSpeakUS($data['speak'][1]);
         //translation
         if ($accessor->getValue($data, '[translation]')) {
-            foreach ($data as $k => $v) {
+            foreach ($accessor->getValue($data, '[translation]') as $k => $v) {
                 switch ($v[0]) {
                     case 'n':
                         $word->setN($v[1]);
@@ -81,8 +80,6 @@ class WorkService
         }
         //shapes
         $word->setShapes($accessor->getValue($data, '[shapes]'));
-        $word->setCreatedAt(new \DateTime());
-        $word->setUpdatedAt(new \DateTime());
         $em->persist($word);
         $em->flush();
 
@@ -98,21 +95,23 @@ class WorkService
         $em = $this->entityManager();
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $wordCollins = new WordCollins();
+        $em->getConnection()->beginTransaction();
         foreach ($collins as $k => $v) {
-            foreach ($v as $sentence) {
+            foreach ($v['translation'] as $sentence) {
                 if (is_array($sentence)) {
+                    $wordCollins = new WordCollins();
                     $wordCollins->setNote($accessor->getValue($sentence, '[note]'));
                     $wordCollins->setSentence($accessor->getValue($sentence, '[sentence]'));
-                    if ($accessor->getValue($v, '[zh]') && $accessor->getValue($v, '[en]')) {
-                        $wordCollins->setCategory($v['zh'] . ' ' . $v['en']);
+                    if ($accessor->getValue($v['translation'], '[zh]') && $accessor->getValue($v['translation'], '[en]')) {
+                        $wordCollins->setCategory($v['translation']['zh'] . ' ' . $v['translation']['en']);
                     }
                     $wordCollins->setWord($word);
                     $em->persist($wordCollins);
+                    $em->flush();
                 }
             }
         }
-        $em->flush();
+        $em->getConnection()->commit();
     }
 
     /**
