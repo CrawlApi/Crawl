@@ -116,6 +116,18 @@ class MongoDBHelper
     }
 
     /**
+     * @param $collectionName
+     * @param $filter
+     * @return array|null
+     */
+    public function setDBRef($collectionName, $filter)
+    {
+        if ($result = $this->findOne($collectionName, $filter))
+            return \MongoDBRef::create($collectionName, $result['_id']);
+        return null;
+    }
+
+    /**
      * @param Cursor $cursor
      * @return array|Cursor
      */

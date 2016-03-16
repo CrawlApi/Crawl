@@ -143,8 +143,20 @@ class WorkService
     public function saveToMongoDB($data)
     {
         $mongodb = new MongoDBHelper('Crawl');
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $word = $this->saveWordToMongoDB($data, $mongodb);
 
-        $this->saveWordToMongoDB($data, $mongodb);
+        if ($word && $accessor->getValue($data, '[collins]')) {
+            $collinsInDB = $this->saveWordCollinsToMongoDB($data['word'], $data['collins'], $mongodb);
+            //DBRef
+//            $result = $mongodb->findOne('crawl_word', $word);
+//            $dbRef = array();
+//            foreach ($collinsInDB as $v) {
+//                if ($newDBRef = $mongodb->setDBRef('crawl_word_collins', $v))
+//                    array_push($dbRef, $newDBRef);
+//            }
+//            $mongodb->update('crawl_word', array('collins' => $dbRef), $result, array());
+        }
 
     }
 
@@ -159,7 +171,7 @@ class WorkService
         $word = $mongodb->findOne('crawl_word', array('word' => $data['word']));
 
         if ($word)
-            return null;
+            return false;
 
         $word = array(
             'word' => $data['word'],
@@ -171,15 +183,49 @@ class WorkService
             'adv' => null,
             'vi' => null,
             'vt' => null,
-            'shapes' => $accessor->getValue($data, '[shapes]')
+            'shapes' => $accessor->getValue($data, '[shapes]'),
+            'collins' => null
         );
         if ($accessor->getValue($data, '[translation]')) {
             foreach ($accessor->getValue($data, '[translation]') as $k => $v) {
                 $word[$v[0]] = $v[1];
             }
         }
+        if ($mongodb->insert('crawl_word', $word))
+            return $word;
+        return false;
+    }
 
-        $mongodb->insert('crawl_word', $word);
+    /**
+     * @param $word
+     * @param $collins
+     * @param \Crawl\CommonBundle\Helper\MongoDBHelper $mongodb
+     * @return array
+     */
+    public function saveWordCollinsToMongoDB($word, $collins, $mongodb)
+    {
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $collinsInDB = array();
 
+        foreach ($collins as $k => $v) {
+            foreach ($v['translation'] as $sentence) {
+                if (is_array($sentence)) {
+                    $wordCollins = array(
+                        'word' => $word,
+                        'category' => null,
+                        'note' => $accessor->getValue($sentence, '[note]'),
+                        'sentence' => $accessor->getValue($sentence, '[sentence]')
+                    );
+                    if ($accessor->getValue($v['translation'], '[zh]') && $accessor->getValue($v['translation'], '[en]')) {
+                        $wordCollins['category'] = ($v['translation']['zh'] . ' ' . $v['translation']['en']);
+                    }
+                    if (!$mongodb->findOne('crawl_word_collins', $wordCollins))
+                        if ($mongodb->insert('crawl_word_collins', $wordCollins))
+                            array_push($collinsInDB, $wordCollins);
+                }
+            }
+        }
+
+        return $collinsInDB;
     }
 }
