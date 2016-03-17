@@ -1,0 +1,9 @@
+crawl_api.takeout_restaurants_api:
+    path: /{place}
+    defaults: { _controller: "CrawlApiBundle:TakeoutApi:restaurantsApi" }
+    methods: [GET, POST]
+
+crawl_api.takeout_restaurant_foods_api:
+    path: /{place}/{restaurant}
+    defaults: { _controller: "CrawlApiBundle:TakeoutApi:restaurantFoodsApi" }
+    methods: [GET, POST]

@@ -1,3 +1,7 @@
 crawl_word_api:
     resource: "@CrawlApiBundle/Resources/config/routing/word_api.yml"
     prefix:   /api/word
+
+crawl_takeout_api:
+    resource: "@CrawlApiBundle/Resources/config/routing/takeout_api.yml"
+    prefix:   /api/takeout
