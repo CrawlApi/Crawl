@@ -97,7 +97,21 @@ class MongoDBHelper
         return (bool)$result->getModifiedCount();
     }
 
-
+    /**
+     * @param $collectionName
+     * @param $filter
+     * @param $deleteOptions
+     * @return bool|InvalidArgumentException
+     */
+    public function delete($collectionName, $filter, $deleteOptions)
+    {
+        if (empty($filter)) return new InvalidArgumentException("The filter is empty. You probably don't want to update every document.");
+        $bulkWrite = new BulkWrite(["ordered" => TRUE]);
+        $bulkWrite->update($filter, $deleteOptions);
+        $result = $this->mongodbManager->executeBulkWrite("{$this->dbName}.{$collectionName}", $bulkWrite);
+        return (bool)$result->getModifiedCount();
+    }
+    
     /**
      * @param $collectionName
      * @param $pipeline
@@ -113,18 +127,6 @@ class MongoDBHelper
         $command = new Command($commandArray);
         $cursor = $this->mongodbManager->executeCommand($this->dbName, $command);
         return $this->toArray($cursor)[0]->result;
-    }
-
-    /**
-     * @param $collectionName
-     * @param $filter
-     * @return array|null
-     */
-    public function setDBRef($collectionName, $filter)
-    {
-        if ($result = $this->findOne($collectionName, $filter))
-            return \MongoDBRef::create($collectionName, $result['_id']);
-        return null;
     }
 
     /**
