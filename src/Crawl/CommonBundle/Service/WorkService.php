@@ -147,15 +147,15 @@ class WorkService
         $word = $this->saveWordToMongoDB($data, $mongodb);
 
         if ($word && $accessor->getValue($data, '[collins]')) {
-            $collinsInDB = $this->saveWordCollinsToMongoDB($data['word'], $data['collins'], $mongodb);
+            $collinsInDB = $this->saveWordCollinsToMongoDB($data['collins'], $mongodb);
             //DBRef
-//            $result = $mongodb->findOne('crawl_word', $word);
-//            $dbRef = array();
-//            foreach ($collinsInDB as $v) {
-//                if ($newDBRef = $mongodb->setDBRef('crawl_word_collins', $v))
-//                    array_push($dbRef, $newDBRef);
-//            }
-//            $mongodb->update('crawl_word', array('collins' => $dbRef), $result, array());
+            $result = $mongodb->findOne('crawl_word', $word);
+            $dbRef = array();
+            foreach ($collinsInDB as $v) {
+                if ($newDBRef = $mongodb->findOne('crawl_word_collins', $v))
+                    array_push($dbRef, $newDBRef->_id);
+            }
+            $mongodb->update('crawl_word', $result, ['$set' => ['collins' => $dbRef]], array());
         }
 
     }
@@ -197,12 +197,11 @@ class WorkService
     }
 
     /**
-     * @param $word
      * @param $collins
      * @param \Crawl\CommonBundle\Helper\MongoDBHelper $mongodb
      * @return array
      */
-    public function saveWordCollinsToMongoDB($word, $collins, $mongodb)
+    public function saveWordCollinsToMongoDB($collins, $mongodb)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
         $collinsInDB = array();
@@ -211,7 +210,6 @@ class WorkService
             foreach ($v['translation'] as $sentence) {
                 if (is_array($sentence)) {
                     $wordCollins = array(
-                        'word' => $word,
                         'category' => null,
                         'note' => $accessor->getValue($sentence, '[note]'),
                         'sentence' => $accessor->getValue($sentence, '[sentence]')
