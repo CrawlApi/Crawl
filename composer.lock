@@ -1123,16 +1123,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.2.2",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "b3313b618f4edd76523572531d5d7e22fe747430"
+                "reference": "ff76e1a660669bb56ba74ba0583fd8d41417bf39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b3313b618f4edd76523572531d5d7e22fe747430",
-                "reference": "b3313b618f4edd76523572531d5d7e22fe747430",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/ff76e1a660669bb56ba74ba0583fd8d41417bf39",
+                "reference": "ff76e1a660669bb56ba74ba0583fd8d41417bf39",
                 "shasum": ""
             },
             "require": {
@@ -1167,7 +1167,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-03-11 19:54:08"
+            "time": "2016-03-17 16:11:57"
         },
         {
             "name": "psr/log",
@@ -1213,12 +1213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "c4c5caff48a2f3b17e3cc988e2b9d7a785779f39"
+                "reference": "3a160355bb1364da55ed9e415c1aa1fa8d457b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/c4c5caff48a2f3b17e3cc988e2b9d7a785779f39",
-                "reference": "c4c5caff48a2f3b17e3cc988e2b9d7a785779f39",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3a160355bb1364da55ed9e415c1aa1fa8d457b6f",
+                "reference": "3a160355bb1364da55ed9e415c1aa1fa8d457b6f",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2016-02-16 07:20:15"
+            "time": "2016-03-15 16:21:41"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1587,12 +1587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a82c065e1904781ccb98427e7f523c7b08313c0c"
+                "reference": "6b1175135bc2a74c08a28d89761272de8beed8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a82c065e1904781ccb98427e7f523c7b08313c0c",
-                "reference": "a82c065e1904781ccb98427e7f523c7b08313c0c",
+                "url": "https://api.github.com/repos/symfony/console/zipball/6b1175135bc2a74c08a28d89761272de8beed8cd",
+                "reference": "6b1175135bc2a74c08a28d89761272de8beed8cd",
                 "shasum": ""
             },
             "require": {
@@ -1639,7 +1639,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 10:34:12"
+            "time": "2016-03-16 17:00:50"
         },
         {
             "name": "symfony/debug",
@@ -2749,12 +2749,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
-                "reference": "2cb831e86023881862b9b1f6e105a13b8438ac74"
+                "reference": "5052a2def8fca91682fe8d135fde61f326132e53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security/zipball/2cb831e86023881862b9b1f6e105a13b8438ac74",
-                "reference": "2cb831e86023881862b9b1f6e105a13b8438ac74",
+                "url": "https://api.github.com/repos/symfony/security/zipball/5052a2def8fca91682fe8d135fde61f326132e53",
+                "reference": "5052a2def8fca91682fe8d135fde61f326132e53",
                 "shasum": ""
             },
             "require": {
@@ -2777,7 +2777,7 @@
                 "psr/log": "~1.0",
                 "symfony/expression-language": "~2.8|~3.0",
                 "symfony/finder": "~2.8|~3.0",
-                "symfony/ldap": "~2.8|~3.0.0",
+                "symfony/ldap": "~2.8|~3.0",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/routing": "~2.8|~3.0",
                 "symfony/validator": "~2.8|~3.0"
@@ -2819,7 +2819,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 19:36:40"
+            "time": "2016-03-16 16:47:19"
         },
         {
             "name": "symfony/security-bundle",
@@ -2827,12 +2827,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "8b9f33e0458bcd30e9fcd2cc7198b717e72b52b9"
+                "reference": "286da713a67a5ff48e5ff7dac7a50a6d312d6854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/8b9f33e0458bcd30e9fcd2cc7198b717e72b52b9",
-                "reference": "8b9f33e0458bcd30e9fcd2cc7198b717e72b52b9",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/286da713a67a5ff48e5ff7dac7a50a6d312d6854",
+                "reference": "286da713a67a5ff48e5ff7dac7a50a6d312d6854",
                 "shasum": ""
             },
             "require": {
@@ -2892,7 +2892,7 @@
             ],
             "description": "Symfony SecurityBundle",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 10:34:12"
+            "time": "2016-03-16 16:19:48"
         },
         {
             "name": "symfony/stopwatch",
