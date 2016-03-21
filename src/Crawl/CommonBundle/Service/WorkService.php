@@ -137,12 +137,10 @@ class WorkService
         return $this->container->get('doctrine.orm.entity_manager');
     }
 
-    /**
-     * @param $data
-     */
-    public function saveToMongoDB($data)
+
+    public function saveToMongoDB($data, $host, $port)
     {
-        $mongodb = new MongoDBHelper('Crawl');
+        $mongodb = new MongoDBHelper('Crawl', $host, $port);
         $accessor = PropertyAccess::createPropertyAccessor();
         $word = $this->saveWordToMongoDB($data, $mongodb);
 

@@ -27,7 +27,7 @@ class WordApiController extends AbstractController
      */
     public function apiAction(Request $request, $word)
     {
-        $url = 'http://www.iciba.com/' . $word;
+        $url = self::ACIBA_BASE_URL . $word;
 
         $curlHelper = $this->get('crawl_common.helper.curl');
         $wordHelper = $this->get('crawl_common.helper.word');
@@ -46,11 +46,15 @@ class WordApiController extends AbstractController
         $wordHelper->shapes($infoDom, $data);
         $wordHelper->collins($dom, $data);
 
-        //存入MongoDB数据库
-        $wordService->saveToMongoDB($data);
-
-        //存入Mysql数据库
-//        $wordService->save($data);
+        if ($this->getParameter('database_driver') == 'pdo_mysql') {
+            //存入Mysql数据库
+            $wordService->save($data);
+        } else if ($this->getParameter('database_driver') == 'pdo_mysql') {
+            //存入本地MongoDB数据库
+            $host = $this->getParameter('mongo_db_host');
+            $port = $this->getParameter('mongo_db_port');
+            $wordService->saveToMongoDB($data, $host, $port);
+        }
 
         return new JsonResponse($data);
     }

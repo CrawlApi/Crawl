@@ -33,13 +33,14 @@ class MongoDBHelper
 
     /**
      * MongoDBHelper constructor.
-     * @param string $host
      * @param $dbName
+     * @param string $host
+     * @param string $port
      */
-    function __construct($dbName, $host = 'localhost:27017')
+    function __construct($dbName, $host = 'localhost', $port = '27017')
     {
         $this->dbName = $dbName;
-        $this->mongodbManager = new Manager('mongodb://' . $host);
+        $this->mongodbManager = new Manager('mongodb://' . $host . ':' . $port);
     }
 
     /**
@@ -111,7 +112,7 @@ class MongoDBHelper
         $result = $this->mongodbManager->executeBulkWrite("{$this->dbName}.{$collectionName}", $bulkWrite);
         return (bool)$result->getModifiedCount();
     }
-    
+
     /**
      * @param $collectionName
      * @param $pipeline
