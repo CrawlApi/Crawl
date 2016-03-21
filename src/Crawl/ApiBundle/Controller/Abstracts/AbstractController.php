@@ -13,4 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AbstractController extends Controller
 {
 
+    const ELEME_BASE_URL = 'https://www.ele.me/restapi/v4/restaurants';
+    const ACIBA_BASE_URL = 'http://www.iciba.com/';
+
 }

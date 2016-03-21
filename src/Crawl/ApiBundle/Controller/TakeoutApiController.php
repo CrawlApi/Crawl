@@ -26,7 +26,7 @@ class TakeoutApiController extends AbstractController
      */
     public function restaurantsApiAction(Request $request, $place)
     {
-        $baseUrl = 'https://www.ele.me/restapi/v4/restaurants';
+        $baseUrl = self::ELEME_BASE_URL;
 
         $curlHelper = $this->get('crawl_common.helper.curl');
         $takeoutHelper = $this->get('crawl_common.helper.takeout');
@@ -40,7 +40,7 @@ class TakeoutApiController extends AbstractController
 
     public function restaurantFoodsApiAction(Request $request, $place, $restaurant)
     {
-        $baseUrl = 'https://www.ele.me/restapi/v4/restaurants';
+        $baseUrl = self::ELEME_BASE_URL;
 
         $curlHelper = $this->get('crawl_common.helper.curl');
         $takeoutHelper = $this->get('crawl_common.helper.takeout');
