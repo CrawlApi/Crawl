@@ -51,3 +51,7 @@ Crawl\CommonBundle\Entity\Word:
             gedmo:
                 timestampable:
                     on: update
+    oneToMany:
+        WordCollins:
+            targetEntity: Crawl\CommonBundle\Entity\WordCollins
+            mappedBy: Word

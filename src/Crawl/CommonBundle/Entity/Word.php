@@ -72,6 +72,18 @@ class Word
      */
     private $updatedAt;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $WordCollins;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->WordCollins = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -369,5 +381,39 @@ class Word
     public function getSpeakUS()
     {
         return $this->speakUS;
+    }
+
+    /**
+     * Add wordCollin
+     *
+     * @param \Crawl\CommonBundle\Entity\WordCollins $wordCollin
+     *
+     * @return Word
+     */
+    public function addWordCollin(\Crawl\CommonBundle\Entity\WordCollins $wordCollin)
+    {
+        $this->WordCollins[] = $wordCollin;
+
+        return $this;
+    }
+
+    /**
+     * Remove wordCollin
+     *
+     * @param \Crawl\CommonBundle\Entity\WordCollins $wordCollin
+     */
+    public function removeWordCollin(\Crawl\CommonBundle\Entity\WordCollins $wordCollin)
+    {
+        $this->WordCollins->removeElement($wordCollin);
+    }
+
+    /**
+     * Get wordCollins
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWordCollins()
+    {
+        return $this->WordCollins;
     }
 }
