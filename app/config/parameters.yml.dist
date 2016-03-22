@@ -8,6 +8,7 @@ parameters:
 
     mongo_db_host:      localhost
     mongo_db_port:      27017
+    mongo_db:           false
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
