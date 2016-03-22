@@ -33,6 +33,11 @@ class WordApiController extends AbstractController
         $wordHelper = $this->get('crawl_common.helper.word');
         $wordService = $this->get('crawl_common.service.word');
 
+        //检查数据库是否有数据
+        $wordData = $this->checkDBDateByWord($word, $wordService);
+        if (count($wordData))
+            return new JsonResponse($wordData);
+
         $body = $curlHelper->curlByUrl($url);
 
         // 解析开始
@@ -46,16 +51,36 @@ class WordApiController extends AbstractController
         $wordHelper->shapes($infoDom, $data);
         $wordHelper->collins($dom, $data);
 
-        if ($this->getParameter('database_driver') == 'pdo_mysql') {
-            //存入Mysql数据库
-            $wordService->save($data);
-        } else if ($this->getParameter('database_driver') == 'pdo_mysql') {
+        if ($this->getParameter('mongo_db')) {
             //存入本地MongoDB数据库
             $host = $this->getParameter('mongo_db_host');
             $port = $this->getParameter('mongo_db_port');
             $wordService->saveToMongoDB($data, $host, $port);
+        } else if ($this->getParameter('database_driver') == 'pdo_mysql') {
+            //存入Mysql数据库
+            $wordService->save($data);
         }
 
         return new JsonResponse($data);
+    }
+
+    /**
+     * @param $word
+     * @param \Crawl\CommonBundle\Service\WorkService $wordService
+     * @return array|null
+     */
+    public function checkDBDateByWord($word, $wordService)
+    {
+        $wordData = [];
+        if ($this->getParameter('mongo_db')) {
+            $wordData = $wordService->findDataByWordInMongoDB($word);
+        } elseif ($this->getParameter('database_driver') == 'pdo_mysql') {
+            $em = $this->get("doctrine.orm.default_entity_manager");
+            $wordData = $em->getRepository('CrawlCommonBundle:Word')->findByWord($word);
+        }
+        if (count($wordData))
+            return $wordData;
+        else
+            return [];
     }
 }

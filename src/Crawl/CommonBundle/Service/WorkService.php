@@ -224,4 +224,20 @@ class WorkService
 
         return $collinsInDB;
     }
+
+    public function findDataByWordInMongoDB($word)
+    {
+        $collinsInDB = [];
+        $host = $this->container->getParameter('mongo_db_host');
+        $port = $this->container->getParameter('mongo_db_port');
+        $mongodb = new MongoDBHelper('Crawl', $host, $port);
+
+        $word = (array)$mongodb->findOne('crawl_word', array('word' => $word));
+        foreach ($word['collins'] as $value) {
+            array_push($collinsInDB, (array)$mongodb->findOne('crawl_word_collins', array('_id' => $value)));
+        }
+        $word['collins'] = $collinsInDB;
+
+        return $word;
+    }
 }
