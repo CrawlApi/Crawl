@@ -76,11 +76,17 @@ class WorkHelper
         $node = $dom->find('.info-base', 0);
         if ($node->find('li.change p')) {
             /** @var ParserDom $v */
-            foreach ($node->find('li.change p span') as $v) {
-                $data['shapes'][] = [str_replace('：', '', trim($v->getPlainText()))];
-            }
-            foreach ($node->find('li.change p a') as $k => $v) {
-                array_push($data['shapes'][$k], trim($v->getPlainText()));
+            $k = -1;
+            foreach ($node->find('li.change p') as $v) {
+                foreach ($v->node->childNodes as $value) {
+                    if ($value->nodeName === "span") {
+                        $data['shapes'][] = [str_replace('：', '', trim($value->nodeValue))];
+                        $k++;
+                    }
+                    if ($value->nodeName === "a") {
+                        array_push($data['shapes'][$k], trim($value->nodeValue));
+                    }
+                }
             }
         }
     }
