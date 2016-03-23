@@ -33,6 +33,8 @@ class WordApiController extends AbstractController
         $wordHelper = $this->get('crawl_common.helper.word');
         $wordService = $this->get('crawl_common.service.word');
 
+        $em = $this->get("doctrine.orm.default_entity_manager");
+
         //检查数据库是否有数据
         $wordData = $this->checkDBDateByWord($word, $wordService);
         if (count($wordData))
@@ -56,12 +58,14 @@ class WordApiController extends AbstractController
             $host = $this->getParameter('mongo_db_host');
             $port = $this->getParameter('mongo_db_port');
             $wordService->saveToMongoDB($data, $host, $port);
+            $wordData = $wordService->findDataByWordInMongoDB($word);
         } else if ($this->getParameter('database_driver') == 'pdo_mysql') {
             //存入Mysql数据库
             $wordService->save($data);
+            $wordData = $em->getRepository('CrawlCommonBundle:Word')->findByWord($word);
         }
 
-        return new JsonResponse($data);
+        return new JsonResponse($wordData);
     }
 
     /**
