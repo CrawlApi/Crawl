@@ -106,11 +106,13 @@ class WorkHelper
         if ($node) {
             $index = -1;
             $arr = 0;
+            //当没有order,设定一个default值
             foreach ($node->find('div') as $v) {
-                //当没有order,设定一个default值
                 if ($v->getAttr('class') != 'section-h') {
                     $index = 0;
                 }
+            }
+            foreach ($node->find('div') as $v) {
                 if ($v->getAttr('class') == 'section-h') {
                     $index++;
                     $arr = 0;
@@ -138,6 +140,8 @@ class WorkHelper
                 }
             }
         }
+        var_dump($data['collins']);
+        exit();
     }
 
 }
