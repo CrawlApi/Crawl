@@ -10,6 +10,7 @@
 namespace Crawl\CommonBundle\Helper;
 
 use HtmlParser\ParserDom;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class WorkHelper
@@ -72,6 +73,7 @@ class WorkHelper
      */
     public function shapes(ParserDom $dom, array &$data)
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
         $data['shapes'] = [];
         $node = $dom->find('.info-base', 0);
         if ($node->find('li.change p')) {
@@ -83,7 +85,9 @@ class WorkHelper
                         $data['shapes'][] = [str_replace('：', '', trim($value->nodeValue))];
                         $k++;
                     }
-                    if ($value->nodeName === "a") {
+                    if ($value->nodeName === "a" && $accessor->getValue($data['shapes'][$k], "[1]")) {
+                        $data['shapes'][$k][1] = $data['shapes'][$k][1] . "," . trim($value->nodeValue);
+                    } elseif ($value->nodeName === "a") {
                         array_push($data['shapes'][$k], trim($value->nodeValue));
                     }
                 }
