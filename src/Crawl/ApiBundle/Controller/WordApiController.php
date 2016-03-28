@@ -12,6 +12,7 @@ use Crawl\ApiBundle\Controller\Abstracts\AbstractController;
 use HtmlParser\ParserDom;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Wiz\Parser\ICIBAParser;
 
 /**
  * Class WorkApi
@@ -27,10 +28,9 @@ class WordApiController extends AbstractController
      */
     public function apiAction(Request $request, $word)
     {
-        $url = self::ACIBA_BASE_URL . $word;
 
         $curlHelper = $this->get('crawl_common.helper.curl');
-        $wordHelper = $this->get('crawl_common.helper.word');
+        $ICIBAParser = new ICIBAParser();
         $wordService = $this->get('crawl_common.service.word');
 
         $em = $this->get("doctrine.orm.default_entity_manager");
@@ -40,18 +40,10 @@ class WordApiController extends AbstractController
         if (count($wordData))
             return new JsonResponse($wordData);
 
-        $body = $curlHelper->curlByUrl($url);
-
-        // 解析开始
-        $dom = new ParserDom($body);
-        $data = ['word' => $word];
-        $infoDom = $dom->find('.result-info', 0);
-
-        $wordHelper->speak($infoDom, $data);
-        $wordHelper->rate($infoDom, $data);
-        $wordHelper->translation($infoDom, $data);
-        $wordHelper->shapes($infoDom, $data);
-        $wordHelper->collins($dom, $data);
+        $data = $ICIBAParser->query($word);
+        if ($data == false) {
+            throw new \LogicException("error");
+        }
 
         if ($this->getParameter('mongo_db')) {
             //存入本地MongoDB数据库
