@@ -23,7 +23,8 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.3",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "andres-montanez/magallanes": "~1.0.6"
     },
     "scripts": {
         "post-install-cmd": [

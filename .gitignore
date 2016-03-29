@@ -85,3 +85,6 @@ crashlytics-build.properties
 # Composer PHAR
 /composer.phar
 
+# mage
+.mage
+

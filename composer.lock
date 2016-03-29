@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ed2a29c9751a1375a9d8ee25d1394f5",
-    "content-hash": "2d9b2392152ef5f0d54c1e6785c151e6",
+    "hash": "bcb60a2fdeb5d2ea9ae7667edad4e04d",
+    "content-hash": "b789d53e905ffe8d3f92dce677980af3",
     "packages": [
         {
             "name": "bupt1987/html-parser",
@@ -3601,12 +3601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lamjack/ICIBAParser.git",
-                "reference": "6fb5f418941cda83fe007491fed36cf88ecde6ed"
+                "reference": "3edb7ab4093e6fd868e7fc7dc0fece5ea4824303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/6fb5f418941cda83fe007491fed36cf88ecde6ed",
-                "reference": "6fb5f418941cda83fe007491fed36cf88ecde6ed",
+                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/3edb7ab4093e6fd868e7fc7dc0fece5ea4824303",
+                "reference": "3edb7ab4093e6fd868e7fc7dc0fece5ea4824303",
                 "shasum": ""
             },
             "require": {
@@ -3624,10 +3624,60 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-03-28 10:23:15"
+            "time": "2016-03-29 02:49:49"
         }
     ],
     "packages-dev": [
+        {
+            "name": "andres-montanez/magallanes",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andres-montanez/Magallanes.git",
+                "reference": "781213dd732be8c2e0f6c430629c0c5ea520405e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andres-montanez/Magallanes/zipball/781213dd732be8c2e0f6c430629c0c5ea520405e",
+                "reference": "781213dd732be8c2e0f6c430629c0c5ea520405e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "malkusch/php-mock": "dev-php-5.3",
+                "phpunit/phpunit": "4.3.5",
+                "satooshi/php-coveralls": ">=0.6.1"
+            },
+            "bin": [
+                "bin/mage"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mage\\": "./Mage",
+                    "Task\\": [
+                        ".mage/tasks",
+                        "../../../.mage/tasks"
+                    ],
+                    "Command\\": [
+                        ".mage/tasks",
+                        "../../../.mage/commands"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Deployment Tool for PHP Applications",
+            "homepage": "http://magephp.com",
+            "keywords": [
+                "deployment"
+            ],
+            "time": "2015-04-12 19:45:32"
+        },
         {
             "name": "doctrine/data-fixtures",
             "version": "v1.1.1",
