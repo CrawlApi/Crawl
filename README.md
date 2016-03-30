@@ -7,7 +7,7 @@ This is PHP code for Crawl Api.
 
 ## Install
 
-1. git clone [https://github.com/code-h/Crawl](https://github.com/code-h/Crawl)
+1. git clone [https://github.com/CrawlApi/Crawl](https://github.com/CrawlApi/Crawl)
 2. composer install
 3. app/config doctrine:schema:update --dump-sql --force
 
@@ -47,7 +47,7 @@ This is PHP code for Crawl Api.
 
 ## Todo
 
-P.S. 需要新增Api可以在[issue #1](https://github.com/code-h/Crawl/issues/1)下留言
+P.S. 需要新增Api可以在[issue #1](https://github.com/CrawlApi/Crawl/issues/1)下留言
 
 ## License
 
