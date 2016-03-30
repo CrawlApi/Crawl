@@ -3601,12 +3601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lamjack/ICIBAParser.git",
-                "reference": "3edb7ab4093e6fd868e7fc7dc0fece5ea4824303"
+                "reference": "69fb298b117bcad38a991898abab2f8404875e4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/3edb7ab4093e6fd868e7fc7dc0fece5ea4824303",
-                "reference": "3edb7ab4093e6fd868e7fc7dc0fece5ea4824303",
+                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/69fb298b117bcad38a991898abab2f8404875e4a",
+                "reference": "69fb298b117bcad38a991898abab2f8404875e4a",
                 "shasum": ""
             },
             "require": {
@@ -3624,7 +3624,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-03-29 02:49:49"
+            "time": "2016-03-30 03:27:07"
         }
     ],
     "packages-dev": [
