@@ -3,7 +3,7 @@
 ### About
 
 1. **What is it?**
-This is PHP code for many crawl api.
+This is PHP code for Crawl Api.
 
 ## Install
 
@@ -44,6 +44,10 @@ This is PHP code for many crawl api.
 | url | http://apimarket.xyz/api/word/ `地理位置` / `店铺id` |
 | method | GET |
 | response | JSON |
+
+## Todo
+
+P.S. 需要新增Api可以在[issue #1](https://github.com/code-h/Crawl/issues/1)下留言
 
 ## License
 
