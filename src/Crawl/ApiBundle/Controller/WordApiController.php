@@ -28,8 +28,6 @@ class WordApiController extends AbstractController
      */
     public function apiAction(Request $request, $word)
     {
-
-        $curlHelper = $this->get('crawl_common.helper.curl');
         $ICIBAParser = new ICIBAParser();
         $wordService = $this->get('crawl_common.service.word');
 
@@ -41,9 +39,6 @@ class WordApiController extends AbstractController
             return new JsonResponse($wordData);
 
         $data = $ICIBAParser->query($word);
-        if ($data == false) {
-            throw new \LogicException("error");
-        }
 
         if ($this->getParameter('mongo_db')) {
             //存入本地MongoDB数据库
