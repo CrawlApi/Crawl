@@ -12,6 +12,7 @@ use Crawl\ApiBundle\Controller\Abstracts\AbstractController;
 use HtmlParser\ParserDom;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Wiz\Parser\ICIBAParser;
 
 /**
@@ -28,6 +29,7 @@ class WordApiController extends AbstractController
      */
     public function apiAction(Request $request, $word)
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
         $ICIBAParser = new ICIBAParser();
         $wordService = $this->get('crawl_common.service.word');
 
@@ -39,6 +41,9 @@ class WordApiController extends AbstractController
             return new JsonResponse($wordData);
 
         $data = $ICIBAParser->query($word);
+        if ($accessor->getValue($data, "[errCode]")) {
+            return new JsonResponse($data);
+        }
 
         if ($this->getParameter('mongo_db')) {
             //存入本地MongoDB数据库
