@@ -67,8 +67,8 @@ class WorkService
         //rate
         $word->setRate($data['rate']);
         //speakUK
-        $word->setSpeakUK($data['speak'][0]);
-        $word->setSpeakUS($data['speak'][1]);
+        $word->setSpeakUK($accessor->getValue($data['speak'], "[0]"));
+        $word->setSpeakUS($accessor->getValue($data['speak'], "[1]"));
         //translation
         if ($accessor->getValue($data, '[translation]')) {
             foreach ($accessor->getValue($data, '[translation]') as $k => $v) {
