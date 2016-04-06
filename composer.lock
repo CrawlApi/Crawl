@@ -1132,16 +1132,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.1",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45"
+                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/064b38c16790249488e7a8b987acf1c9d7383c09",
+                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09",
                 "shasum": ""
             },
             "require": {
@@ -1156,13 +1156,13 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
                 "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
                 "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
-                "swiftmailer/swiftmailer": "~5.3",
-                "videlalvaro/php-amqplib": "~2.4"
+                "swiftmailer/swiftmailer": "~5.3"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -1171,11 +1171,11 @@
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
@@ -1206,7 +1206,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-13 16:08:35"
+            "time": "2016-04-02 13:12:58"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -3435,12 +3435,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "b32d4be60588c24a1888ff1615528b3780426a69"
+                "reference": "d4d72be187ff34969498bf1176bfad9b455cc13d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/b32d4be60588c24a1888ff1615528b3780426a69",
-                "reference": "b32d4be60588c24a1888ff1615528b3780426a69",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/d4d72be187ff34969498bf1176bfad9b455cc13d",
+                "reference": "d4d72be187ff34969498bf1176bfad9b455cc13d",
                 "shasum": ""
             },
             "require": {
@@ -3485,7 +3485,7 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2016-04-01 08:39:25"
+            "time": "2016-04-02 08:04:34"
         },
         {
             "name": "symfony/yaml",
@@ -3603,12 +3603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lamjack/ICIBAParser.git",
-                "reference": "4f16cde1b4dbd1606d9fa2ded98122960a2e231f"
+                "reference": "f33648e38938d48416d7db697b316565db718453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/4f16cde1b4dbd1606d9fa2ded98122960a2e231f",
-                "reference": "4f16cde1b4dbd1606d9fa2ded98122960a2e231f",
+                "url": "https://api.github.com/repos/lamjack/ICIBAParser/zipball/f33648e38938d48416d7db697b316565db718453",
+                "reference": "f33648e38938d48416d7db697b316565db718453",
                 "shasum": ""
             },
             "require": {
@@ -3626,7 +3626,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-03-31 10:05:54"
+            "time": "2016-04-02 05:36:08"
         }
     ],
     "packages-dev": [
