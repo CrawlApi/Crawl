@@ -40,14 +40,11 @@ class TakeoutApiController extends AbstractController
 
     public function restaurantFoodsApiAction(Request $request, $place, $restaurant)
     {
-        $baseUrl = self::ELEME_BASE_URL;
 
         $curlHelper = $this->get('crawl_common.helper.curl');
         $takeoutHelper = $this->get('crawl_common.helper.takeout');
 
-        $allData = $takeoutHelper->getAllData($baseUrl, $place, $curlHelper);
         $data = ['place' => $place];
-        $takeoutHelper->getRestaurants($allData, $data);
         $takeoutHelper->findFootsByRestaurant($data, $curlHelper, $restaurant);
 
         return new JsonResponse($data);
