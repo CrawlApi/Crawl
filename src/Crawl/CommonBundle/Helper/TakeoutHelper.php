@@ -56,6 +56,7 @@ class TakeoutHelper
                 'id' => $value->id,
                 'name' => $value->name,
                 'rating' => $value->rating,
+                'month_sales' => $value->month_sales,
                 'latitude' => $value->latitude,
                 'longitude' => $value->longitude,
                 'address' => $value->address,
