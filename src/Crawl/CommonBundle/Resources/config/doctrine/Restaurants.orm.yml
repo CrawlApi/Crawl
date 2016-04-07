@@ -1,0 +1,38 @@
+Crawl\CommonBundle\Entity\Restaurants:
+    type: entity
+    table: crawl_restaurants
+    repositoryClass: Crawl\CommonBundle\Repository\RestaurantsRepository
+    indexes:
+        id_index:
+            columns: [ id ]
+    id:
+        id:
+            type: integer
+    fields:
+        name:
+            type: string
+            nullable: false
+        rating:
+            type: float
+            nullable: true
+        monthSales:
+            type: integer
+            nullable: true
+        latitude:
+            type: float
+            nullable: true
+        longitude:
+            type: float
+            nullable: true
+        address:
+            type: string
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    oneToMany:
+        RestaurantFoods:
+            targetEntity: Crawl\CommonBundle\Entity\RestaurantFoods
+            mappedBy: Restaurant

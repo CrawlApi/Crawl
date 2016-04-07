@@ -1,0 +1,34 @@
+Crawl\CommonBundle\Entity\RestaurantFoods:
+    type: entity
+    table: crawl_restaurant_foods
+    repositoryClass: Crawl\CommonBundle\Repository\RestaurantFoodsRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        rating:
+            type: float
+            nullable: true
+        monthSales:
+            type: integer
+            nullable: true
+        price:
+            type: float
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    manyToOne:
+        Restaurant:
+            targetEntity: Crawl\CommonBundle\Entity\Restaurants
+            joinColumn:
+                name: RestaurantId
+                referencedColumnName: id
+                onDelete: CASCADE

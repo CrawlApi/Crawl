@@ -197,4 +197,3 @@ class WordCollins
         return $this->Word;
     }
 }
-
