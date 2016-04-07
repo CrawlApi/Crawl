@@ -75,7 +75,7 @@ class TakeoutHelper
             $id = $v['id'];
             $url = 'https://www.ele.me/restapi/v4/restaurants/' . $id . '/mutimenu';
             $dom = new ParserDom($curlHelper->curlByUrl($url));
-            $stringToArrayDom = json_decode($dom->getPlainText());
+            $stringToArrayDom = json_decode(utf8_decode($dom->getPlainText()));
             $data['restaurants'][$k]['foods'] = $this->getFoots($stringToArrayDom);
         }
     }
@@ -87,16 +87,10 @@ class TakeoutHelper
      */
     public function findFootsByRestaurant(array &$data, $curlHelper, $restaurant)
     {
-        foreach ($data['restaurants'] as $k => $v) {
-            $id = $v['id'];
-
-            if ($restaurant == $id) {
-                $url = 'https://www.ele.me/restapi/v4/restaurants/' . $id . '/mutimenu';
-                $dom = new ParserDom($curlHelper->curlByUrl($url));
-                $stringToArrayDom = json_decode($dom->getPlainText());
-                $data['restaurants'][$k]['foods'] = $this->getFoots($stringToArrayDom);
-            }
-        }
+        $url = 'https://www.ele.me/restapi/v4/restaurants/' . $restaurant . '/mutimenu';
+        $dom = new ParserDom($curlHelper->curlByUrl($url));
+        $stringToArrayDom = json_decode(utf8_decode($dom->getPlainText()));
+        $data['restaurant']['foods'] = $this->getFoots($stringToArrayDom);
     }
 
 
