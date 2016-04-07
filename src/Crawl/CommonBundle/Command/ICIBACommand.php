@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wiz\Parser\ICIBAParser;
 
 class ICIBACommand extends ContainerAwareCommand
 {
@@ -47,21 +48,10 @@ class ICIBACommand extends ContainerAwareCommand
             ''
         ]);
 
-        $curlHelper = $this->getContainer()->get('crawl_common.helper.curl');
-        $wordHelper = $this->getContainer()->get('crawl_common.helper.word');
-
-        $body = $curlHelper->curlByUrl($url);
+        $ICIBAParser = new ICIBAParser();
 
         // 解析开始
-        $dom = new ParserDom($body);
-        $data = ['word' => $word];
-        $infoDom = $dom->find('.result-info', 0);
-
-        $wordHelper->speak($infoDom, $data);
-        $wordHelper->rate($infoDom, $data);
-        $wordHelper->translation($infoDom, $data);
-        $wordHelper->shapes($infoDom, $data);
-        $wordHelper->collins($dom, $data);
+        $data = $ICIBAParser->query($word);
 
         var_dump($data);
 
