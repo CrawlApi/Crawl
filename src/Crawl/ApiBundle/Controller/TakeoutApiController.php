@@ -28,24 +28,33 @@ class TakeoutApiController extends AbstractController
     {
         $baseUrl = self::ELEME_BASE_URL;
 
-        $curlHelper = $this->get('crawl_common.helper.curl');
-        $takeoutHelper = $this->get('crawl_common.helper.takeout');
+        $em = $this->getDoctrine()->getEntityManager();
 
-        $allData = $takeoutHelper->getAllData($baseUrl, $place, $curlHelper);
-        $data = ['place' => $place];
-        $takeoutHelper->getRestaurants($allData, $data);
+        $takeoutHelper = $this->get('crawl_common.helper.takeout');
+        $restaurants = $em->getRepository('CrawlCommonBundle:Restaurants')->findArray();
+        if (count($restaurants)) {
+            $data = $restaurants;
+        } else {
+            $allData = $takeoutHelper->getAllData($baseUrl, $place);
+            $data = ['place' => $place];
+            $takeoutHelper->getRestaurants($allData, $data);
+        }
 
         return new JsonResponse($data);
     }
 
     public function restaurantFoodsApiAction(Request $request, $place, $restaurant)
     {
-
-        $curlHelper = $this->get('crawl_common.helper.curl');
         $takeoutHelper = $this->get('crawl_common.helper.takeout');
+        $em = $this->getDoctrine()->getEntityManager();
 
-        $data = ['place' => $place];
-        $takeoutHelper->findFootsByRestaurant($data, $curlHelper, $restaurant);
+        $restaurantFoods = $em->getRepository('CrawlCommonBundle:RestaurantFoods')->findArray($restaurant);
+        if (count($restaurantFoods)) {
+            $data = $restaurantFoods;
+        } else {
+            $data = ['place' => $place];
+            $takeoutHelper->findFootsByRestaurant($data, $restaurant);
+        }
 
         return new JsonResponse($data);
     }
