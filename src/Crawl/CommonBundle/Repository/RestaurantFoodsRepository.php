@@ -10,4 +10,18 @@ namespace Crawl\CommonBundle\Repository;
  */
 class RestaurantFoodsRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * @return array
+     */
+    public function findArray($id)
+    {
+        return $this->createQueryBuilder('q')
+            ->select('q')
+            ->leftJoin('q.Restaurant', 'r')
+            ->where('r.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }
