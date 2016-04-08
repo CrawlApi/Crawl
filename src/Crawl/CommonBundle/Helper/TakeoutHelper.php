@@ -20,23 +20,23 @@ class TakeoutHelper
     /**
      * @param $baseUrl
      * @param $place
-     * @param \Crawl\CommonBundle\Helper\CurlHelper $curlHelper
      * @param int $offset
      * @return array
      */
-    public function getAllData($baseUrl, $place, $curlHelper, $offset = 0)
+    public function getAllData($baseUrl, $place, $offset = 0)
     {
         $data = [];
+        $clientHelper = new ClientHelper();
         while (1) {
             $url = $baseUrl . '?geohash=' . $place . '&offset=' . $offset . '&type=geohash';
-            if ($curlHelper->curlByUrl($url) != '[]') {
+            if ($clientHelper->body($url) != '[]') {
                 // 解析开始
-                $dom = new ParserDom($curlHelper->curlByUrl($url));
+                $dom = new ParserDom($clientHelper->body($url));
                 $stringToArrayDom = json_decode($dom->getPlainText());
                 foreach ($stringToArrayDom as $value) {
                     array_push($data, $value);
                 }
-                $offset = $offset + 24;
+                $offset = $offset + count($stringToArrayDom);
             } else {
                 break;
             }
@@ -83,13 +83,13 @@ class TakeoutHelper
 
     /**
      * @param array $data
-     * @param \Crawl\CommonBundle\Helper\CurlHelper $curlHelper
      * @param $restaurant
      */
-    public function findFootsByRestaurant(array &$data, $curlHelper, $restaurant)
+    public function findFootsByRestaurant(array &$data, $restaurant)
     {
+        $clientHelper = new ClientHelper();
         $url = 'https://www.ele.me/restapi/v4/restaurants/' . $restaurant . '/mutimenu';
-        $dom = new ParserDom($curlHelper->curlByUrl($url));
+        $dom = new ParserDom($clientHelper->body($url));
         $stringToArrayDom = json_decode(utf8_decode($dom->getPlainText()));
         $data['restaurant']['foods'] = $this->getFoots($stringToArrayDom);
     }
