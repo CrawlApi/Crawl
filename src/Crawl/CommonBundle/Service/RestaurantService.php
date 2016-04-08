@@ -51,7 +51,6 @@ class RestaurantService
             $restaurant->setAddress($restaurants['address']);
             $em->persist($restaurant);
             $em->flush();
-            var_dump($restaurants);
         }
     }
 
@@ -74,7 +73,6 @@ class RestaurantService
                 'RestaurantId' => $id,
                 'createdAt' => (new \DateTime())->format('Y-m-d H:i:s')
             ));
-            var_dump($k);
         }
         $em->getConnection()->commit();
     }
