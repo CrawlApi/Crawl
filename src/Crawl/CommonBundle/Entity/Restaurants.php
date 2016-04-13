@@ -286,4 +286,3 @@ class Restaurants
         return $this->RestaurantFoods;
     }
 }
-

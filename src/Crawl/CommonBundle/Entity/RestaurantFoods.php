@@ -197,4 +197,3 @@ class RestaurantFoods
         return $this->Restaurant;
     }
 }
-

@@ -1,0 +1,39 @@
+Crawl\CommonBundle\Entity\DoubleColorBalls:
+    type: entity
+    table: crawl_double_color_ball
+    repositoryClass: Crawl\CommonBundle\Repository\DoubleColorBallsRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        redOneNum:
+            type: integer
+            nullable: false
+        redTwoNum:
+            type: integer
+            nullable: false
+        redThreeNum:
+            type: integer
+            nullable: false
+        redFourNum:
+            type: integer
+            nullable: false
+        redFiveNum:
+            type: integer
+            nullable: false
+        redSixNum:
+            type: integer
+            nullable: false
+        blueNum:
+            type: integer
+            nullable: false
+        issue:
+            type: integer
+            nullable: false
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
