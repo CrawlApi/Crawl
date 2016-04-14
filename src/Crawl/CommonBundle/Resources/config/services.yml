@@ -11,8 +11,14 @@ services:
         class: Crawl\CommonBundle\Service\WorkService
         calls:
             - [ setContainer, [ '@service_container' ] ]
+
     crawl_common.service.restaurant:
         class: Crawl\CommonBundle\Service\RestaurantService
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    crawl_common.service.double_color_ball:
+        class: Crawl\CommonBundle\Service\DoubleColorBallService
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
