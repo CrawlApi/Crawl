@@ -27,7 +27,10 @@ class DoubleColorBallHelper
         $clientHelper = new ClientHelper();
         $url = $baseUrl . $issue;
         $dom = $clientHelper->body($url);
-
+        //判断是否存在服务器错误
+        if (is_array($dom) && array_key_exists("errCode", $dom)) {
+            return $dom;
+        }
         $result = ['issue' => $issue];
         $this->parser($dom, $result);
 

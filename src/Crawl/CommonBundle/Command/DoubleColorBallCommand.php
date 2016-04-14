@@ -10,9 +10,7 @@ namespace Crawl\CommonBundle\Command;
 
 
 use Crawl\CommonBundle\Helper\DoubleColorBallHelper;
-use Crawl\CommonBundle\Service\DoubleColorBallService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
