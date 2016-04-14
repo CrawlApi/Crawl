@@ -9,8 +9,19 @@
 namespace Crawl\CommonBundle\Helper;
 
 
+use HtmlParser\ParserDom;
+
+/**
+ * Class DoubleColorBallHelper
+ * @package Crawl\CommonBundle\Helper
+ */
 class DoubleColorBallHelper
 {
+    /**
+     * @param $baseUrl
+     * @param $issue
+     * @return array
+     */
     public function getDataByIssue($baseUrl, $issue)
     {
         $clientHelper = new ClientHelper();
@@ -23,8 +34,20 @@ class DoubleColorBallHelper
         return $result;
     }
 
+    /**
+     * @param string $html
+     * @param array $result
+     */
     public function parser(string $html, array &$result = [])
     {
-
+        $dom = new ParserDom($html);
+        $mainContent = $dom->find('table', 4);
+        if ($mainContent) {
+            foreach ($mainContent->find('tr', 1)->find('td') as $value) {
+                array_push($result, $value->getPlainText());
+            }
+        } else {
+            $result = ['errCode' => 404, 'errMsg' => "开奖信息不存在"];
+        }
     }
 }
