@@ -10,4 +10,16 @@ namespace Crawl\CommonBundle\Repository;
  */
 class DoubleColorBallsRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function findArray($issue)
+    {
+        return $this->createQueryBuilder('q')
+            ->select('q')
+            ->where('q.issue = :issue')
+            ->setParameter('issue', $issue)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

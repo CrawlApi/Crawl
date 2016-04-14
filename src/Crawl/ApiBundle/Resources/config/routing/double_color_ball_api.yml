@@ -1,0 +1,4 @@
+crawl_api.double_color_ball_issue_api:
+    path: /{issue}
+    defaults: { _controller: "CrawlApiBundle:DoubleColorBallApi:issueApi" }
+    methods: [GET, POST]

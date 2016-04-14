@@ -5,3 +5,7 @@ crawl_word_api:
 crawl_takeout_api:
     resource: "@CrawlApiBundle/Resources/config/routing/takeout_api.yml"
     prefix:   /api/takeout
+
+crawl_double_color_ball_api:
+    resource: "@CrawlApiBundle/Resources/config/routing/double_color_ball_api.yml"
+    prefix:   /api/dcd
