@@ -45,6 +45,9 @@ This is PHP code for Crawl Api.
 | method | GET |
 | response | JSON |
 
+## API Documentation
+[请点此处](http://apimarket.xyz/api/doc)
+
 ## Todo
 
 P.S. 需要新增Api可以在[issue #1](https://github.com/CrawlApi/Crawl/issues/1)下留言
