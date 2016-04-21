@@ -42,3 +42,5 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.crawl.log"
             level: error
+
+nelmio_api_doc: ~

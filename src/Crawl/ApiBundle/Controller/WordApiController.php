@@ -9,11 +9,11 @@
 namespace Crawl\ApiBundle\Controller;
 
 use Crawl\ApiBundle\Controller\Abstracts\AbstractController;
-use HtmlParser\ParserDom;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Wiz\Parser\ICIBAParser;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Class WorkApi
@@ -23,6 +23,18 @@ class WordApiController extends AbstractController
 {
 
     /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="This is a description of your API method",
+     *  requirements={
+     *      {
+     *          "name"="word",
+     *          "dataType"="string",
+     *          "requirement"="^[a-z]+$",
+     *          "description"="search word name"
+     *      }
+     *  },
+     * )
      * @param Request $request
      * @param $word
      * @return JsonResponse

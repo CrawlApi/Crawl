@@ -12,6 +12,7 @@ namespace Crawl\ApiBundle\Controller;
 use Crawl\ApiBundle\Controller\Abstracts\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Class TakeoutApiController
@@ -20,6 +21,18 @@ use Symfony\Component\HttpFoundation\Request;
 class TakeoutApiController extends AbstractController
 {
     /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="This is a description of your API method",
+     *  requirements={
+     *      {
+     *          "name"="place",
+     *          "dataType"="string",
+     *          "requirement"=".*",
+     *          "description"="place in map(code)"
+     *      }
+     *  },
+     * )
      * @param Request $request
      * @param $place
      * @return JsonResponse
@@ -43,6 +56,30 @@ class TakeoutApiController extends AbstractController
         return new JsonResponse($data);
     }
 
+    /**
+     * @ApiDoc(
+     *  resource=true,
+     *  description="This is a description of your API method",
+     *  requirements={
+     *      {
+     *          "name"="place",
+     *          "dataType"="string",
+     *          "requirement"=".*",
+     *          "description"="place in map(code)"
+     *      },
+     *      {
+     *          "name"="restaurant",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="restaurant code"
+     *      }
+     *  },
+     * )
+     * @param Request $request
+     * @param $place
+     * @param $restaurant
+     * @return JsonResponse
+     */
     public function restaurantFoodsApiAction(Request $request, $place, $restaurant)
     {
         $takeoutHelper = $this->get('crawl_common.helper.takeout');
