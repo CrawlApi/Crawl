@@ -1,0 +1,9 @@
+crawl_api.instagram_profile_api:
+    path: /profile/{username}
+    defaults: { _controller: "CrawlApiBundle:InstagramApi:profileApi" }
+    methods: [GET, POST]
+
+crawl_api.instagram_post_api:
+    path: /post/{username}
+    defaults: { _controller: "CrawlApiBundle:InstagramApi:postApi" }
+    methods: [GET, POST]

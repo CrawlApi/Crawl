@@ -9,3 +9,7 @@ crawl_takeout_api:
 crawl_double_color_ball_api:
     resource: "@CrawlApiBundle/Resources/config/routing/double_color_ball_api.yml"
     prefix:   /api/dcd
+
+crawl_instagram_api:
+    resource: "@CrawlApiBundle/Resources/config/routing/instagram_api.yml"
+    prefix:   /api/instagram
