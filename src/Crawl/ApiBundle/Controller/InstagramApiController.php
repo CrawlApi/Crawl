@@ -9,14 +9,16 @@
 namespace Crawl\ApiBundle\Controller;
 
 
+use Crawl\ApiBundle\Controller\Abstracts\AbstractController;
 use Crawl\CommonBundle\Helper\ClientHelper;
 use GuzzleHttp\Client;
 use HtmlParser\ParserDom;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class InstagramApiController
+class InstagramApiController extends AbstractController
 {
     /**
      * @ApiDoc(
@@ -62,21 +64,42 @@ class InstagramApiController
      *          "dataType"="string",
      *          "requirement"="^[a-z]+$",
      *          "description"="instagram username"
+     *      },
+     *      {
+     *          "name"="quantity",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="instagram posts quantity"
      *      }
      *  },
      * )
      * @param string $username
+     * @param Request $request
      * @return JsonResponse
      */
-    public function postApiAction($username)
+    public function postApiAction(Request $request, $username)
     {
+        $quantity = $request->query->get('quantity');
         $clientHelper = new ClientHelper();
-        $url = 'https://www.instagram.com/' . $username . '/media/';
-        $dom = new ParserDom($clientHelper->body($url));
-        $stringToArrayDom = json_decode($dom->getPlainText());
-        if ($stringToArrayDom->status == "ok") {
-            return new JsonResponse($stringToArrayDom->items);
+        $baseUrl = 'https://www.instagram.com/' . $username . '/media/';
+        $id = null;
+        $data = [];
+        while (1) {
+            $url = $baseUrl . '?max_id=' . $id;
+            $dom = new ParserDom($clientHelper->body($url));
+            $stringToArrayDom = json_decode($dom->getPlainText());
+            if ($stringToArrayDom->status == "ok" && !empty($stringToArrayDom->items)) {
+                foreach ($stringToArrayDom->items as $k => $item) {
+                    if ($quantity !== null && $quantity >= 0 && $quantity == $k) {
+                        return new JsonResponse($data);
+                    }
+                    array_push($data, $item);
+                }
+                $id = $stringToArrayDom->items[count($stringToArrayDom->items) - 1]->id;
+            } else {
+                break;
+            }
         }
-        return new JsonResponse([]);
+        return new JsonResponse($data);
     }
 }
