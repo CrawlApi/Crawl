@@ -1,0 +1,4 @@
+crawl_api.weibo_profile_api:
+    path: /profile/{username}
+    defaults: { _controller: "CrawlApiBundle:WeiboApi:profileApi" }
+    methods: [GET, POST]

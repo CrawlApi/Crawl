@@ -13,3 +13,7 @@ crawl_double_color_ball_api:
 crawl_instagram_api:
     resource: "@CrawlApiBundle/Resources/config/routing/instagram_api.yml"
     prefix:   /api/instagram
+
+crawl_weibo_api:
+    resource: "@CrawlApiBundle/Resources/config/routing/weibo_api.yml"
+    prefix:   /api/weibo

@@ -6,6 +6,9 @@ services:
     crawl_common.helper.takeout:
         class: Crawl\CommonBundle\Helper\TakeoutHelper
 
+    crawl_common.helper.weibo:
+        class: Crawl\CommonBundle\Helper\WeiboHelper
+
     # service
     crawl_common.service.word:
         class: Crawl\CommonBundle\Service\WorkService
