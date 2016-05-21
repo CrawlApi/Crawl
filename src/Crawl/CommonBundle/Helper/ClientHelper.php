@@ -32,11 +32,12 @@ class ClientHelper
 
     /**
      * @param string $link
+     * @param string $method
      * @return array|string
      */
-    public function body($link)
+    public function body($link, $method = 'GET')
     {
-        $response = $this->client->request('GET', sprintf('%s', $link), [
+        $response = $this->client->request($method, sprintf('%s', $link), [
             'headers' => [
                 'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 'Accept-Encoding' => 'gzip, deflate',
