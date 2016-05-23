@@ -44,14 +44,17 @@ class InstagramApiController extends AbstractController
         $dom = new ParserDom($clientHelper->body($url));
         $stringToArrayDom = json_decode($dom->getPlainText());
         $pk = null;
-        foreach ($stringToArrayDom->users as $k => $v) {
-            if ($v->user->username == $username) {
-                $pk = $v->user->pk;
+        if ($stringToArrayDom->has_more == true) {
+            foreach ($stringToArrayDom->users as $k => $v) {
+                if ($v->user->username == $username) {
+                    $pk = $v->user->pk;
+                }
             }
+            $profileApi = "https://i.instagram.com/api/v1/users/" . $pk . "/info/";
+            $dom = new ParserDom($clientHelper->body($profileApi));
+            return new Response($dom->getPlainText());
         }
-        $profileApi = "https://i.instagram.com/api/v1/users/" . $pk . "/info/";
-        $dom = new ParserDom($clientHelper->body($profileApi));
-        return new Response($dom->getPlainText());
+        return new JsonResponse(['status' => false]);
     }
 
     /**
