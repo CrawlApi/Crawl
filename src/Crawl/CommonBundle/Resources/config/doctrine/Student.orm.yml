@@ -1,0 +1,41 @@
+Crawl\CommonBundle\Entity\Student:
+    type: entity
+    table: crawl_student
+    repositoryClass: Crawl\CommonBundle\Repository\StudentRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+        name:
+            type: string
+        entranceAt:
+            type: string
+            nullable: true
+        address:
+            type: string
+            nullable: true
+        school:
+            type: string
+            nullable: true
+        xs:
+            type: array
+            nullable: true
+        courseOneName:
+            type: string
+            nullable: true
+        courseOneNum:
+            type: string
+            nullable: true
+        courseTwoName:
+            type: string
+            nullable: true
+        courseTwoNum:
+            type: string
+            nullable: true
+        gpa:
+            type: string
+            nullable: true
